@@ -51,6 +51,7 @@
             android:id="@+id/tab_layout"
             android:layout_width="wrap_content"
             android:layout_height="64dp"
+            android:visibility="gone"
             android:orientation="horizontal">
 
             <Button
@@ -60,6 +61,7 @@
                 android:padding="8dp"
                 android:textSize="@dimen/text_size_s"
                 android:text="FIT IMAGE"
+                android:visibility="gone"
                 android:textColor="@color/base"
                 android:background="@color/text"
                 android:layout_width="wrap_content"
@@ -72,6 +74,7 @@
                 android:padding="8dp"
                 android:textSize="@dimen/text_size_s"
                 android:text="1:1"
+                android:visibility="gone"
                 android:textColor="@color/base"
                 android:background="@color/text"
                 android:layout_width="wrap_content"
@@ -84,6 +87,7 @@
                 android:padding="8dp"
                 android:textSize="@dimen/text_size_s"
                 android:text="3:4"
+                android:visibility="gone"
                 android:textColor="@color/base"
                 android:background="@color/text"
                 android:layout_width="wrap_content"
@@ -95,6 +99,7 @@
                 android:padding="8dp"
                 android:textSize="@dimen/text_size_s"
                 android:text="4:3"
+                android:visibility="gone"
                 android:textColor="@color/base"
                 android:background="@color/text"
                 android:layout_width="wrap_content"
@@ -106,6 +111,7 @@
                 android:padding="8dp"
                 android:textSize="@dimen/text_size_s"
                 android:text="9:16"
+                android:visibility="gone"
                 android:textColor="@color/base"
                 android:background="@color/text"
                 android:layout_width="wrap_content"
@@ -117,6 +123,8 @@
                 android:padding="8dp"
                 android:textSize="@dimen/text_size_s"
                 android:text="16:9"
+
+                android:visibility="gone"
                 android:textColor="@color/base"
                 android:background="@color/text"
                 android:layout_width="wrap_content"
@@ -129,6 +137,7 @@
                 android:padding="8dp"
                 android:textSize="@dimen/text_size_s"
                 android:text="7:5"
+                android:visibility="gone"
                 android:textColor="@color/base"
                 android:background="@color/text"
                 android:layout_width="wrap_content"
@@ -140,6 +149,7 @@
                 android:layout_margin="8dp"
                 android:padding="8dp"
                 android:textSize="@dimen/text_size_s"
+                android:visibility="gone"
                 android:text="FREE"
                 android:textColor="@color/base"
                 android:background="@color/text"
@@ -153,6 +163,7 @@
                 android:padding="8dp"
                 android:textSize="@dimen/text_size_s"
                 android:text="CIRCLE"
+                android:visibility="gone"
                 android:textColor="@color/base"
                 android:background="@color/text"
                 android:layout_width="wrap_content"
@@ -162,7 +173,7 @@
         </LinearLayout>
     </HorizontalScrollView>
 
-    <com.isseiaoki.simplecropview.CropImageView
+    <com.eltonkola.simplecropoverlayview.CropImageOverlayView
         android:id="@+id/cropImageView"
         android:layout_below="@id/toolbar"
         android:layout_above="@id/tab_bar"

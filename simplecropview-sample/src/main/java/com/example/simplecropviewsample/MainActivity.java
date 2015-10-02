@@ -8,13 +8,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import com.eltonkola.simplecropoverlayview.CropImageOverlayView;
 import com.isseiaoki.simplecropview.CropImageView;
 
 
 public class MainActivity extends Activity {
 
     // Views ///////////////////////////////////////////////////////////////////////////////////////
-    private CropImageView mCropView;
+    private CropImageOverlayView mCropView;
     private RelativeLayout mRootLayout;
 
     // Image file index(1 ~ 5)
@@ -66,38 +67,38 @@ public class MainActivity extends Activity {
                     startActivity(intent);
                     break;
                 case R.id.buttonFitImage:
-                    mCropView.setCropMode(CropImageView.CropMode.RATIO_FIT_IMAGE);
+                    mCropView.setCropMode(CropImageOverlayView.CropMode.RATIO_FIT_IMAGE);
                     break;
                 case R.id.button1_1:
-                    mCropView.setCropMode(CropImageView.CropMode.RATIO_1_1);
+                    mCropView.setCropMode(CropImageOverlayView.CropMode.RATIO_1_1);
                     break;
                 case R.id.button3_4:
-                    mCropView.setCropMode(CropImageView.CropMode.RATIO_3_4);
+                    mCropView.setCropMode(CropImageOverlayView.CropMode.RATIO_3_4);
                     break;
                 case R.id.button4_3:
-                    mCropView.setCropMode(CropImageView.CropMode.RATIO_4_3);
+                    mCropView.setCropMode(CropImageOverlayView.CropMode.RATIO_4_3);
                     break;
                 case R.id.button9_16:
-                    mCropView.setCropMode(CropImageView.CropMode.RATIO_9_16);
+                    mCropView.setCropMode(CropImageOverlayView.CropMode.RATIO_9_16);
                     break;
                 case R.id.button16_9:
-                    mCropView.setCropMode(CropImageView.CropMode.RATIO_16_9);
+                    mCropView.setCropMode(CropImageOverlayView.CropMode.RATIO_16_9);
                     break;
                 case R.id.buttonCustom:
                     mCropView.setCustomRatio(7, 5);
                     break;
                 case R.id.buttonFree:
-                    mCropView.setCropMode(CropImageView.CropMode.RATIO_FREE);
+                    mCropView.setCropMode(CropImageOverlayView.CropMode.RATIO_FREE);
                     break;
                 case R.id.buttonCircle:
-                    mCropView.setCropMode(CropImageView.CropMode.CIRCLE);
+                    mCropView.setCropMode(CropImageOverlayView.CropMode.CIRCLE);
                     break;
                 case R.id.buttonChangeImage:
                     incrementImageIndex();
                     mCropView.setImageBitmap(getImageForIndex(mImageIndex));
                     break;
                 case R.id.buttonRotateImage:
-                    mCropView.rotateImage(CropImageView.RotateDegrees.ROTATE_90D);
+                    mCropView.rotateImage(CropImageOverlayView.RotateDegrees.ROTATE_90D);
                     break;
             }
         }
@@ -106,7 +107,15 @@ public class MainActivity extends Activity {
     // Bind views //////////////////////////////////////////////////////////////////////////////////
 
     private void findViews() {
-        mCropView = (CropImageView) findViewById(R.id.cropImageView);
+        mCropView = (CropImageOverlayView) findViewById(R.id.cropImageView);
+
+
+        mCropView.setOverlayAlpha(90);
+        mCropView.setOverlayImage(BitmapFactory.decodeResource(getResources(), R.drawable.foto_sample));
+
+        mCropView.setCropMode(CropImageView.CropMode.RATIO_CUSTOM);
+        mCropView.setCustomRatio(600, 600);
+
         findViewById(R.id.buttonDone).setOnClickListener(btnListener);
         findViewById(R.id.buttonFitImage).setOnClickListener(btnListener);
         findViewById(R.id.button1_1).setOnClickListener(btnListener);

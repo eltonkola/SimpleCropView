@@ -59,6 +59,10 @@ public class CropImageView extends ImageView {
     private float mLastX, mLastY;
     private PointF mCircleHandlePos = new PointF();
 
+    public RectF getFrameRect(){
+        return mFrameRect;
+    }
+
     // Instance variables for customizable attributes //////////////////////////////////////////////
 
     private TouchArea mTouchArea = TouchArea.OUT_OF_BOUNDS;
@@ -211,46 +215,46 @@ public class CropImageView extends ImageView {
     // Handle styleable ////////////////////////////////////////////////////////////////////////////
 
     private void handleStyleable(Context context, AttributeSet attrs, int defStyle, float mDensity) {
-        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.CropImageView, defStyle, 0);
+        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.CropImageOverlayView, defStyle, 0);
         Drawable drawable;
         mCropMode = CropMode.RATIO_1_1;
         try {
-            drawable = ta.getDrawable(R.styleable.CropImageView_imgSrc);
+            drawable = ta.getDrawable(R.styleable.CropImageOverlayView_imgSrc);
             if (drawable != null) setImageBitmap(((BitmapDrawable) drawable).getBitmap());
             for (CropMode mode : CropMode.values()) {
-                if (ta.getInt(R.styleable.CropImageView_cropMode, 3) == mode.getId()) {
+                if (ta.getInt(R.styleable.CropImageOverlayView_cropMode, 3) == mode.getId()) {
                     mCropMode = mode;
                     break;
                 }
             }
-            mBackgroundColor = ta.getColor(R.styleable.CropImageView_backgroundColor, TRANSPARENT);
+            mBackgroundColor = ta.getColor(R.styleable.CropImageOverlayView_backgroundColor, TRANSPARENT);
             super.setBackgroundColor(mBackgroundColor);
-            mOverlayColor = ta.getColor(R.styleable.CropImageView_overlayColor, TRANSLUCENT_BLACK);
-            mFrameColor = ta.getColor(R.styleable.CropImageView_frameColor, WHITE);
-            mHandleColor = ta.getColor(R.styleable.CropImageView_handleColor, WHITE);
-            mGuideColor = ta.getColor(R.styleable.CropImageView_guideColor, TRANSLUCENT_WHITE);
+            mOverlayColor = ta.getColor(R.styleable.CropImageOverlayView_overlayColor, TRANSLUCENT_BLACK);
+            mFrameColor = ta.getColor(R.styleable.CropImageOverlayView_frameColor, WHITE);
+            mHandleColor = ta.getColor(R.styleable.CropImageOverlayView_handleColor, WHITE);
+            mGuideColor = ta.getColor(R.styleable.CropImageOverlayView_guideColor, TRANSLUCENT_WHITE);
             for (ShowMode mode : ShowMode.values()) {
-                if (ta.getInt(R.styleable.CropImageView_guideShowMode, 1) == mode.getId()) {
+                if (ta.getInt(R.styleable.CropImageOverlayView_guideShowMode, 1) == mode.getId()) {
                     mGuideShowMode = mode;
                     break;
                 }
             }
 
             for (ShowMode mode : ShowMode.values()) {
-                if (ta.getInt(R.styleable.CropImageView_handleShowMode, 1) == mode.getId()) {
+                if (ta.getInt(R.styleable.CropImageOverlayView_handleShowMode, 1) == mode.getId()) {
                     mHandleShowMode = mode;
                     break;
                 }
             }
             setGuideShowMode(mGuideShowMode);
             setHandleShowMode(mHandleShowMode);
-            mHandleSize = ta.getDimensionPixelSize(R.styleable.CropImageView_handleSize, (int) (HANDLE_SIZE_IN_DP * mDensity));
-            mTouchPadding = ta.getDimensionPixelSize(R.styleable.CropImageView_touchPadding, 0);
-            mMinFrameSize = ta.getDimensionPixelSize(R.styleable.CropImageView_minFrameSize, (int) (MIN_FRAME_SIZE_IN_DP * mDensity));
-            mFrameStrokeWeight = ta.getDimensionPixelSize(R.styleable.CropImageView_frameStrokeWeight, (int) (FRAME_STROKE_WEIGHT_IN_DP * mDensity));
-            mGuideStrokeWeight = ta.getDimensionPixelSize(R.styleable.CropImageView_guideStrokeWeight, (int) (GUIDE_STROKE_WEIGHT_IN_DP * mDensity));
-            mIsCropEnabled = ta.getBoolean(R.styleable.CropImageView_cropEnabled, true);
-            mInitialFrameScale = constrain(ta.getFloat(R.styleable.CropImageView_initialFrameScale, DEFAULT_INITIAL_FRAME_SCALE), 0.01f, 1.0f, DEFAULT_INITIAL_FRAME_SCALE);
+            mHandleSize = ta.getDimensionPixelSize(R.styleable.CropImageOverlayView_handleSize, (int) (HANDLE_SIZE_IN_DP * mDensity));
+            mTouchPadding = ta.getDimensionPixelSize(R.styleable.CropImageOverlayView_touchPadding, 0);
+            mMinFrameSize = ta.getDimensionPixelSize(R.styleable.CropImageOverlayView_minFrameSize, (int) (MIN_FRAME_SIZE_IN_DP * mDensity));
+            mFrameStrokeWeight = ta.getDimensionPixelSize(R.styleable.CropImageOverlayView_frameStrokeWeight, (int) (FRAME_STROKE_WEIGHT_IN_DP * mDensity));
+            mGuideStrokeWeight = ta.getDimensionPixelSize(R.styleable.CropImageOverlayView_guideStrokeWeight, (int) (GUIDE_STROKE_WEIGHT_IN_DP * mDensity));
+            mIsCropEnabled = ta.getBoolean(R.styleable.CropImageOverlayView_cropEnabled, true);
+            mInitialFrameScale = constrain(ta.getFloat(R.styleable.CropImageOverlayView_initialFrameScale, DEFAULT_INITIAL_FRAME_SCALE), 0.01f, 1.0f, DEFAULT_INITIAL_FRAME_SCALE);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -260,7 +264,7 @@ public class CropImageView extends ImageView {
 
     // Drawing method //////////////////////////////////////////////////////////////////////////////
 
-    private void drawEditFrame(Canvas canvas) {
+    public void drawEditFrame(Canvas canvas) {
         if(!mIsCropEnabled)return;
 
         if(mCropMode == CropMode.CIRCLE){

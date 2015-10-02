@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="CropImageView">
+    <declare-styleable name="CropImageOverlayView">
         <attr name="imgSrc" format="reference" />
         <attr name="cropMode">
             <enum name="ratio_fit_image" value="0"/>
