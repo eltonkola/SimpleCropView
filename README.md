@@ -4,18 +4,19 @@ This is a fork of: https://github.com/IsseiAoki/SimpleCropView
 I am extending the class to use an image overlay (on fixed ratio)
 
 to use it, just change the crop class to:
-
+<code>
     <com.eltonkola.simplecropoverlayview.CropImageOverlayView
     ...
     />
-
+</code>
 from your activity then you can add the bitmap, and the alpha:
-
+<code>
    mCropView.setOverlayAlpha(90);
    mCropView.setOverlayImage(BitmapFactory.decodeResource(getResources(), R.drawable.foto_sample));
 
    //mCropView.setCropMode(CropImageView.CropMode.RATIO_CUSTOM);
    //mCropView.setCustomRatio(100, 100);
+</code>
 
 ##License
 ```
